@@ -17,7 +17,8 @@ You can select your favorite database or validator and integrate it.
      1. git clone this repo
      2. change repo to your own
      3. npm install
-     4. ready to use (you can try /docs first)
+     4. allow eslint permission in vscode
+     5. ready to use (you can try /docs first)
 
 ### Next Roadmap
 
