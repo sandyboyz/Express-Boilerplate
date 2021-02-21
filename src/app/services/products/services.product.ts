@@ -26,7 +26,7 @@ export class ProductServices {
   /**
    * Get all Product data
    */
-  getProduct() {
+  getProduct(): ProductInterfaceFull[] {
     return this.data;
   }
 
@@ -34,7 +34,7 @@ export class ProductServices {
    * Get Product data by id
    * @param id
    */
-  getProductById(id: number) {
+  getProductById(id: number): ProductInterfaceFull | undefined {
     return this.data.find((v: ProductInterfaceFull) => v.id === id);
   }
 
@@ -42,14 +42,14 @@ export class ProductServices {
    * Insert Product
    * @param data
    */
-  insertProduct(data: ProductInterfaceFull) {
+  insertProduct(data: ProductInterfaceFull): number {
     return this.data.push(data);
   }
 
   /**
    * @param id
    */
-  deleteProduct(id: number) {
+  deleteProduct(id: number): ProductInterfaceFull[] {
     return this.data.filter((v: ProductInterfaceFull) => v.id !== id);
   }
 
@@ -58,7 +58,7 @@ export class ProductServices {
    * @param id
    * @param updatedData
    */
-  updateProductById(id: number, updatedData: ProductInterface) {
+  updateProductById(id: number, updatedData: ProductInterface): ProductInterfaceFull | undefined {
     this.data = this.data.map((v: ProductInterfaceFull) => {
       if (v.id === id) {
         return {

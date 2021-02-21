@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
+// import BadParamsException from '../../errors/BadParamsExpection';
 import { ProductServices } from './services.product';
 
 const services = new ProductServices();
 
 export class ProductController {
-  async getProduct(req: Request, res: Response, next: NextFunction) {
+  async getProduct(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const result = await services.getProduct();
       res.json(result);
@@ -13,7 +14,7 @@ export class ProductController {
     }
   }
 
-  async getProductById(req: Request, res: Response, next: NextFunction) {
+  async getProductById(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const result = await services.getProductById(+req.params.id);
       res.json(result);
@@ -22,7 +23,7 @@ export class ProductController {
     }
   }
 
-  async insertProduct(req: Request, res: Response, next: NextFunction) {
+  async insertProduct(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const result = await services.insertProduct({
         id: 10,
@@ -35,7 +36,7 @@ export class ProductController {
     }
   }
 
-  async deleteProduct(req: Request, res: Response, next: NextFunction) {
+  async deleteProduct(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const result = await services.deleteProduct(+req.params.id);
       res.json(result);
@@ -44,7 +45,7 @@ export class ProductController {
     }
   }
 
-  async updateProductById(req: Request, res: Response, next: NextFunction) {
+  async updateProductById(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const result = await services.updateProductById(+req.params.id, {
         name: 'Product #10',

@@ -1,17 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export interface HttpData {
-  message: string;
-  data?: any;
-}
+export type HttpData = Record<string, unknown> | null;
+
 class HttpExpection extends Error {
   statusCode: number;
-  data: any[];
-  constructor(statusCode: number, httpData: HttpData) {
-    super(httpData.message);
+  data: HttpData;
+  constructor(statusCode: number, message: string, data?: HttpData) {
+    super(message);
     this.name = 'HttpExpection';
     this.statusCode = statusCode;
-    this.data = httpData.data || null;
+    this.data = data || null;
   }
 }
 
