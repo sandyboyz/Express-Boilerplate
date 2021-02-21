@@ -1,10 +1,11 @@
 import { Application } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import errorHandler from './errors';
+import errorHandler from './middlewares/error.middleware';
 import routes from './routes';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import { logger } from './logger';
 
 const swaggerDefinition = {
   openapi: '3.0.0',
@@ -39,10 +40,10 @@ export default (app: Application): void => {
 
   // Api Handling
 
-  Object.keys(routes).forEach((key) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    app.use('/api', (routes as any)[key]);
-  });
+  let key: keyof typeof routes;
+  for (key in routes) {
+    app.use('/api', routes[key]);
+  }
 
   // Error Handling
 
@@ -50,14 +51,13 @@ export default (app: Application): void => {
 
   // Unhandling Rejection Expection
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  process.on('unhandledRejection', (reason: string, p: Promise<any>) => {
-    console.log(p);
+  process.on('unhandledRejection', (reason: string, p: Promise<unknown>) => {
+    logger.fatal(p, 'Unhandled Promise Rejection');
     throw reason;
   });
 
   process.on('uncaughtException', (error: Error) => {
-    console.log(error);
+    logger.fatal(error, 'Uncaught Expection');
     process.exit(1);
   });
 };
