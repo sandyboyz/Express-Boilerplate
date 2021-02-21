@@ -8,6 +8,7 @@ It's use some of good technologies in community
 - Documentation: **Swagger/OpenAPI**
 - Commit/Push Protection (Git Hooks): **Husky**
 - Code Styles: **ESLint + Prettier**
+- Reliable Logger: **Pino**
 
 It's create very low level **Express Boilerplate** with no database integration or validator.
 You can select your favorite database or validator and integrate it.
@@ -20,6 +21,7 @@ You can select your favorite database or validator and integrate it.
      4. allow eslint permission in vscode
      5. ready to use (you can try /docs first)
 
-### Next Roadmap
+### Candidate Roadmap
 
-> **Implement logger to stdout with winston/pino**
+1. **ORM / Query Builder**
+2. **Dependency Injection**
